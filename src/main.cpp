@@ -2,7 +2,6 @@
 //Compatible with the Arduino IDE 1.0
 //Library version:1.1
 #include <Arduino.h>
-#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
 #if defined(ARDUINO) && ARDUINO >= 100
@@ -20,28 +19,31 @@ uint8_t check[8] = {0x0, 0x1, 0x3, 0x16, 0x1c, 0x8, 0x0};
 uint8_t cross[8] = {0x0, 0x1b, 0xe, 0x4, 0xe, 0x1b, 0x0};
 uint8_t retarrow[8] = {0x1, 0x1, 0x5, 0x9, 0x1f, 0x8, 0x4};
 
-LiquidCrystal_I2C lcd(0x27, 20, 4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27, 16, 2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 void helloWorld() {
   lcd.print("Hello world...");
   lcd.setCursor(0, 1);
   lcd.print(" i ");
   lcd.printByte(3);
-  lcd.print(" Leo pidar!");
+  lcd.print(" Liquid Crystal!");
   delay(5000);
 }
-void helloPidar() {
-  lcd.print("Hello pidar...");
-  lcd.setCursor(0, 1);
-  lcd.print(" i ");
-  lcd.printByte(3);
-  lcd.print(" Leo pidar!");
-  delay(5000);
-}
-void setup() {
-  lcd.init();                      // initialize the lcd
-  lcd.backlight();
 
+void multlineWrite() {
+  // Print a message to the LCD.
+  lcd.backlight();
+  lcd.setCursor(3, 0);
+  lcd.print("Hello, world!");
+  lcd.setCursor(2, 1);
+  lcd.print("Ywrobot Arduino!");
+  lcd.setCursor(0, 2);
+  lcd.print("Arduino LCM IIC 2004");
+  lcd.setCursor(2, 3);
+  lcd.print("Power By Ec-yuan!");
+}
+
+void createChars() {
   lcd.createChar(0, bell);
   lcd.createChar(1, note);
   lcd.createChar(2, clock);
@@ -50,9 +52,13 @@ void setup() {
   lcd.createChar(5, check);
   lcd.createChar(6, cross);
   lcd.createChar(7, retarrow);
-  lcd.home();
+}
+void setup() {
+  lcd.init();                      // initialize the lcd
+  lcd.backlight();
 
-//  helloWorld();
+  createChars();
+  lcd.home();
 }
 
 // display all keycodes
@@ -75,6 +81,6 @@ void displayKeyCodes(void) {
 }
 
 void loop() {
-  helloPidar();
-//  displayKeyCodes();
+  helloWorld();
+  displayKeyCodes();
 }
