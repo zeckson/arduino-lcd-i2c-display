@@ -9,7 +9,7 @@ DFRobot I2C LCD display with Liquid Crystal based on platformio
 `LiquidCrystal_I2C`
 
 ## Build and compilation
-`pio run` -- build everything
+`pio run` -- build everything  
 `pio run --target upload` -- build and upload to arduino
 
 ## Hardware:
